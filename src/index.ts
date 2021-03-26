@@ -1,4 +1,5 @@
 import * as WebSocket from 'ws';
+import rclient from 'redis-async';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -21,8 +22,10 @@ wss.on('connection', function connection(ws, req) {
 
 wss.on('connection', (ws: WebSocket, req : any) => {
 
-    ws.on('message', (message: string) => {
-      console.log('received: %s', message);
+    ws.on('message', async (message: string) => {
+      await rclient.get("vjs06nx4swo@liamg.moc", async (err, reply) => {
+        console.log('received: %s', message);
+      });
 
       wss.clients.forEach(client => {
         if (client.readyState === WebSocket.OPEN) {
