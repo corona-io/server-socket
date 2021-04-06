@@ -25,7 +25,7 @@ wss.on('connection', (ws: WebSocket, req : any) => {
 
     ws.on('message', async (message: string) => {
       await rclient.get("vjs06nx4swo@liamg.moc", async (err, reply) => {
-        console.log('received: %s', verify(message));
+        console.log('received: %s', await verify(message));
       });
 
       wss.clients.forEach(client => {
