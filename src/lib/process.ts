@@ -31,5 +31,5 @@ export const process = (async (str) => {
 
 
 
-  return str.split(',');
+  return;
 });
