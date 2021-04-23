@@ -12,9 +12,9 @@ export const process = (async (str) => {
       });
       break;
     case 'move':
-      rclient.hmset(str[2],{
-        "x":str[3],
-        "y":str[4]
+      rclient.hmset(str[1],{
+        "x":str[2],
+        "y":str[3]
       });
       break;
     case 'attack':
@@ -22,6 +22,7 @@ export const process = (async (str) => {
     case 'damage':
       break;
     case 'ohmygod':
+    
       break;
     case 'lv999boss':
       break;
