@@ -6,7 +6,7 @@ dotenv.config();
 
 const wss = new WebSocket.Server({ port: 3001 });
   
-rclient.rpush('playerList');
+//rclient.rpush('playerList');
 //console.log(rclient.lrange('player',0,-1));
 
 wss.on('connection', (ws: WebSocket, req : any) => {
