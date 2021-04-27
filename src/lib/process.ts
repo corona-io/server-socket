@@ -4,6 +4,7 @@ import rclient from 'redis-async';
 export const process = (async (str) => {
 
   switch (str[0]) {
+    rclient.rpush('playerList',str[1]);
     case 'create':
       rclient.hmset(str[2],{
         "hp":100,
