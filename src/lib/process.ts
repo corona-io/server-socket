@@ -5,7 +5,7 @@ export const process = (async (str) => {
 
   switch (str[0]) {
     case 'create':
-      rclient.rpush('playerList',str[1]);
+      rclient.rpush('playerList',str[2]);
       rclient.hmset(str[2],{
         "hp":100,
         "x":str[3],
