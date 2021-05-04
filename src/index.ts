@@ -30,6 +30,6 @@ wss.on('connection', async (ws: WebSocket, req : any) => {
   });
 
   //send immediatly a feedback to the incoming connection    
-  ws.send(await newUser());
+ // ws.send(await newUser());
 });
 
