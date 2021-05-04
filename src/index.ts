@@ -1,28 +1,35 @@
 import * as WebSocket from 'ws';
 import rclient from 'redis-async';
 import dotenv from 'dotenv';
-import {process} from './lib/process';
+import {process, newUser} from './lib/process';
 dotenv.config();
 
 const wss = new WebSocket.Server({ port: 3001 });
   
 //console.log(rclient.lrange('player',0,-1));
+rclient.set('enemy', 0);
 
-wss.on('connection', (ws: WebSocket, req : any) => {
+
+wss.on('connection', async (ws: WebSocket, req : any) => {
 
   ws.on('message', async (message: any) => {
     message = await message.split(',');
     console.log('received: %s', message);
     process(message);
 
-    wss.clients.forEach(client => {
+    wss.clients.forEach(async client => {
       if (client.readyState === WebSocket.OPEN) {
         client.send("brodcast: "+message);
-        
+
+        if (await rclient.get('enemy') < 30) {
+          client.send("enemy: "+ await Math.random().toFixed(6));
+          await rclient.set('enemy', await rclient.get('enemy') + 1);
+        }
       }
     });
   });
 
-    //send immediatly a feedback to the incoming connection    
-    ws.send('Hi there, I am a WebSocket server');
+  //send immediatly a feedback to the incoming connection    
+  ws.send(await newUser());
 });
+
