@@ -30,6 +30,9 @@ wss.on('connection', async (ws: WebSocket, req : any) => {
   });
 
   let list = await newUser();
-  ws.send(`${list['list']}`);
+  ws.send(list['list']);
+  ws.send(list['hp']);
+  ws.send(list['x']);
+  ws.send(list['y']);
 });
 
