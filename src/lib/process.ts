@@ -40,13 +40,9 @@ export const newUser = (async () => {
   let y = [];
   
   for (let i = 0; i < list.length; i++) {
-  console.log(await rclient.hget(list[i],'hp'));
-
     await hp.push(await rclient.hget(list[i],'hp'));
     await x.push(await rclient.hget(list[i],'x'));
     await y.push(await rclient.hget(list[i],'y'));
-  console.log(list);
-
   }
   return {list, hp, x, y};
 });
