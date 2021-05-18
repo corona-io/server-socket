@@ -22,14 +22,13 @@ wss.on('connection', async (ws: WebSocket, req : any) => {
         client.send("brodcast: "+message);
 
         if (await rclient.get('enemy') < 30) {
-          client.send("enemy: "+ await Math.random().toFixed(6));
+          client.send("enemy: "+ await Math.random().toFixed(8));
           await rclient.set('enemy', await rclient.get('enemy') + 1);
         }
       }
     });
   });
 
-  //send immediatly a feedback to the incoming connection    
- // ws.send(await newUser());
+  ws.send(`${await newUser()}`);
 });
 

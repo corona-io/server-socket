@@ -31,14 +31,22 @@ export const process = (async (str) => {
 });
 
 export const newUser = (async () => {
-  const list = rclient.lrange('playerList',0,-1);
+  const list = await rclient.lrange('playerList',0,-1);
+  if (list.length == 0) {
+    return 0
+  }
   let hp = [];
   let x = [];
   let y = [];
+  
   for (let i = 0; i < list.length; i++) {
-    hp.push(await rclient.hget(list[i],'hp'));
-    x.push(await rclient.hget(list[i],'x'));
-    y.push(await rclient.hget(list[i],'y'));
+  console.log(await rclient.hget(list[i],'hp'));
+
+    await hp.push(await rclient.hget(list[i],'hp'));
+    await x.push(await rclient.hget(list[i],'x'));
+    await y.push(await rclient.hget(list[i],'y'));
+  console.log(list);
+
   }
   return {list, hp, x, y};
 });
