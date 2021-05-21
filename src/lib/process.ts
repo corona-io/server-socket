@@ -22,7 +22,7 @@ export const process = (async (str) => {
     case 'damage':
       break;
     case 'ohmygod':
-    
+      await rclient.lrem('playerList',1,str[1]); 
       break;
     case 'lv999boss':
       break;
